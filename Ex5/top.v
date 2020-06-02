@@ -33,11 +33,11 @@ module traffic(clk, red, amber, green);
 			state = 3'b010;
 		else
 			state = 3'b100;
+			
 		// The following didn't work - are these not the same?
 		//state = ( red & ~amber & ~green) ? 3'b110:
 			    //( red &  amber & ~green) ? 3'b001:
 			    //(~red & ~amber &  green) ? 3'b010:
-			    //(~red &  amber & ~green) ? 3'b100:
 			    //3'b100;
 	end
 			 

@@ -14,8 +14,10 @@ module top_tb(
 
     parameter CLK_PERIOD = 10;
 
-	reg clk, rst, button;
+	reg clk, rst, button, err;
+	reg [2:0] count;
 	wire [2:0] throw;
+	wire [2:0] thrown;
 	
 	initial begin
     clk = 0;
@@ -24,19 +26,38 @@ module top_tb(
     end
     
     initial begin
-    	rst = 1;
-    	button = 1;
+    	rst <= 1;
+    	button <= 1;
+    	count <= 1;
+    	err <= 0;
     	#CLK_PERIOD
-    	rst = 0;
     	forever begin
-        	#5*CLK_PERIOD
-        	rst = 1;
-        	#3*CLK_PERIOD
+    	    rst <= 0;
+    		button <= 1;
+        	#(count*CLK_PERIOD)
         	button = 0;
+        	#(CLK_PERIOD)
+        	rst = 1;
+        	#(CLK_PERIOD)
+        	if (thrown != count)
+        		begin
+        			$display("***TEST FAILED! expected throw=%d, actual throw=%d ***", count, thrown);
+        			err = 1;
+        		end
+        	count = count + 1;
+        	if (count == 7)
+        		count = 1;
     	end
     end
     
-    dicethrow testdicethrow(clk, rst, button, throw);
+    initial begin
+    	#(50*CLK_PERIOD)
+    	if (err)
+    		$display("***TEST FAILED!***");
+    	else
+    		$display("***TEST PASSED!***");
+    end
+    dicethrow testdicethrow(clk, rst, button, throw, thrown);
     
-    
+endmodule
     

@@ -18,26 +18,30 @@
 
 `timescale 1ns / 100ps
 
-module dicethrow(clk, rst, button, throw);
+module dicethrow(clk, rst, button, throw, thrown);
 	
 	// I/O
     input clk, rst, button;
-    output [2:0] throw;
-	wire thrown;
+    output reg [2:0] throw; 
+	output reg [2:0] thrown;
 	
     //logic
-    assign thrown = 1'b0;
+    //thrown = 1'b0;
 	always @(posedge clk or posedge rst)
 	begin
 		if (rst)
-			throw = 3'b000;
+			throw <= 3'b000;
+		else if (throw == 3'b000 || throw == 3'b111)
+			throw <= 3'b001; 
 		else if (button)
-			if throw[2]&throw[1]
-				throw = 3'b001;
+			begin
+			if (throw[2]&throw[1])
+				throw <= 3'b001;
 			else
-			    throw = throw + 1;
+			    throw <= throw + 1;
+			end
 		else
-			thrown = 1'b1;
+			thrown <= throw;
 	end
 
 endmodule

@@ -19,7 +19,7 @@ module top_tb(
 	wire [2:0] throw;
 	wire [2:0] thrown;
 	
-	initial begin
+    initial begin
     clk = 0;
     forever
         #(CLK_PERIOD/2) clk = ~clk;

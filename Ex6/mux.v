@@ -26,9 +26,10 @@ module mux(
     );
     
     //Todo: define registers and wires here
-    input a, b, sel;
-    output out;
+    input [2:0] a, b;
+    input sel;
+    output [2:0] out;
        
     //Todo: define your logic here
-    assign #5 out = sel&b | ~sel&a;
+    assign out = (sel) ? b : a;
 endmodule

@@ -31,24 +31,26 @@ module mux_tester();
 		err = 0;
 		forever begin
     	    rst <= 0;
-    	    if (~sel) begin
-    			button <= 1;
-        		#(count*CLK_PERIOD)
-        		button = 0;
+    	    // commented out in case this was the problem... 
+    	    //if (~sel) begin
+    			//button <= 1;
+        		//#(count*CLK_PERIOD)
+        		//button = 0;
         		//#(CLK_PERIOD)
         		//#(CLK_PERIOD)
-        		if (result != count)
-        			begin
-        				$display("***TEST FAILED! expected throw=%d, actual throw=%d ***", count, result);
-        				err = 1;
-        			end
-        		count = count + 1;
-        		if (count == 7)
-        			count = 1;
-        	end
+        		//if (result != count)
+        			//begin
+        				//$display("***TEST FAILED! expected throw=%d, actual throw=%d ***", count, result);
+        				//err = 1;
+        			//end
+        		//count = count + 1;
+        		//if (count == 7)
+        			//count = 1;
+        	//end
     	end
     end
 
 	dice_traffic_mux my_dice_traffic_mux(rst, clk, button, sel, result);
+	
 
 endmodule

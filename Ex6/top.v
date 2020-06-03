@@ -26,19 +26,14 @@ module dice_traffic_mux(rst, clk, button, sel, result);
 
 	input rst, clk, button, sel;
 	output [2:0] result;
-	wire [2:0] diceout, trafficout;
+	wire [2:0] diceout;
 	wire red, amber, green;
 	
-	assign trafficout = {red, amber, green};
-	
+	assign result = (sel) ? {red, amber, green} : diceout;
 
 	dicethrow my_dice(.rst(rst), .clk(clk), .button(button), .throw(diceout));
 	traffic my_traffic(.clk(clk), .red(red), .amber(amber), .green(green));
-	mux my_mux(.a(diceout), .b(trafficout), .sel(sel), .out(result));
 
-	//mux my_mux1(.a(diceout[1]), .b(trafficout[1]), .sel(sel), .out(result[1]));
-	//mux my_mux0(.a(diceout[0]), .b(trafficout[0]), .sel(sel), .out(result[0]));
-	
 	
 endmodule	
 	

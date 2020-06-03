@@ -24,29 +24,30 @@ module mux_tester();
     end
     
     initial begin
-    	rst <= 0;
-    	sel <= 0;
-    	button <= 1;
-    	count <= 1;
+    	rst = 0;
+    	sel = 0;
+    	button = 1;
+    	count = 1;
 		err = 0;
 		forever begin
-    	    rst <= 0;
+			rst = 1;
+			#CLK_PERIOD
+    	    rst = 0;
     	    // commented out in case this was the problem... 
-    	    //if (~sel) begin
-    			//button <= 1;
-        		//#(count*CLK_PERIOD)
-        		//button = 0;
-        		//#(CLK_PERIOD)
-        		//#(CLK_PERIOD)
-        		//if (result != count)
-        			//begin
-        				//$display("***TEST FAILED! expected throw=%d, actual throw=%d ***", count, result);
-        				//err = 1;
-        			//end
-        		//count = count + 1;
-        		//if (count == 7)
-        			//count = 1;
-        	//end
+    	    if (~sel) begin
+    			button <= 1;
+        		#(count*CLK_PERIOD)
+        		button = 0;
+        		#(CLK_PERIOD)
+        		// the problem I was having lies somewhere in here...
+        		if (result != count) begin
+        			$display("***TEST FAILED! expected throw=%d, actual throw=%d ***", count, result);
+        			err = 1;
+        		end
+        		count = count + 1;
+        		if (count == 7)
+        			count = 1;
+        	end
     	end
     end
 

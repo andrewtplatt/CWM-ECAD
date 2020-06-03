@@ -23,26 +23,32 @@ module dicethrow(clk, rst, button, throw);
     // I/O
     input clk, rst, button;
     output reg [2:0] throw; 
-    reg [2:0] thrown;
+    reg [2:0] prev_throw;
 	
     //logic
     //thrown = 1'b0;
 	always @(posedge clk or posedge rst)
 	begin
+		// If we are in a valid state go as normal, otherwise go to 001
+		if (throw)
+			prev_throw = throw;
+		else begin
+			prev_throw = 3'b000;
+			throw = 3'b000;
+		end
 		if (rst)
-			throw <= 3'b000;
+			throw = 3'b000;
 		else if (throw == 3'b000 || throw == 3'b111)
-			throw <= 3'b001; 
+			throw = 3'b001;
 		else if (button)
 			begin
 			if (throw[2]&throw[1])
-				throw <= 3'b001;
+				throw = 3'b001;
 			else
-			    throw <= throw + 1;
+			    throw = throw + 1;
 			end
 		else
-		    thrown <= throw;
-
+		    throw = prev_throw;
 	end
 
 endmodule

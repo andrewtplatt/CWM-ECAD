@@ -1,12 +1,11 @@
 
-set design "Ex6"
+set design "Ex8"
 set top top
 set sim_top top_tb
 set device xcvu9p-fsgd2104-2L-e
 set proj_dir ./project
 set repo_dir ./ip_repo
 set project_constraints constraints.xdc
-
 
 set test_name "test"
 
@@ -20,13 +19,8 @@ create_fileset -constrset -quiet constraints
 #add_files -fileset constraints -norecurse ${project_constraints}
 #set_property is_enabled false [get_files ${project_constraints}]
 
-#Todo: add verilog modules here
-<<<<<<< HEAD
-read_verilog "traffic.v"
-read_verilog "dice.v"
-#read_verilog "mux.v"
-=======
->>>>>>> upstream/master
+#Todo: Add your IP here
+
 read_verilog "top.v"
 read_verilog "top_tb.v"
 

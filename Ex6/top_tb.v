@@ -1,12 +1,18 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Test bench for Exercise #6 - Dice or Traffic Lights?
+<<<<<<< HEAD
 // Student Name: Andrew Platt
 // Date: 03/06/2020
+=======
+// Student Name:
+// Date: 
+>>>>>>> upstream/master
 //
 // Description: A testbench module to test Ex6 - Dice or Traffic Lights?
 // You need to write the whole file
 //////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 `timescale 1ns/100ps
 
 module mux_tester();
@@ -55,3 +61,5 @@ module mux_tester();
 	
 
 endmodule
+=======
+>>>>>>> upstream/master

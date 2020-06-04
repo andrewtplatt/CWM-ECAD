@@ -1,7 +1,12 @@
 //////////////////////////////////////////////////////////////////////////////////
 // Exercise #6 
+<<<<<<< HEAD
 // Student Name: Andrew Platt
 // Date: 03/06/2020
+=======
+// Student Name:
+// Date: 
+>>>>>>> upstream/master
 //
 //
 //  Description: In this exercise, you need to design a multiplexer between a dice and traffic 
@@ -20,6 +25,7 @@
 //
 //////////////////////////////////////////////////////////////////////////////////
 
+<<<<<<< HEAD
 `timescale 1ns/100ps
 
 module dice_traffic_mux(rst, clk, button, sel, result);
@@ -44,3 +50,5 @@ endmodule
 	
 	
 
+=======
+>>>>>>> upstream/master

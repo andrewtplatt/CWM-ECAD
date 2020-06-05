@@ -23,7 +23,7 @@ module times_table_tester();
         #(CLK_PERIOD/2) clk = ~clk;
     end
 	
-	assign #(2*CLK_PERIOD) expected_result = (a == 3'b000 || b == 3'b000) ? 0:
+	assign #(CLK_PERIOD) expected_result = (a == 3'b000 || b == 3'b000) ? 0:
 							 (a == 3'b001) ? b:
 							 (b == 3'b001) ? a:
 							 (a == 3'b010) ? b+b:
@@ -47,7 +47,7 @@ module times_table_tester();
 		a = 3'b000;
 		b = 3'b000;
 		forever begin
-		    #(3*CLK_PERIOD)
+		    #(2*CLK_PERIOD)
 			if (result != expected_result) begin
 				$display("*** TEST FAILED! Expected result: %d. Result: %d ***", expected_result, result);
 				err = 1;
